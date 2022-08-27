@@ -1,0 +1,94 @@
+import { Request, Response, NextFunction } from 'express';
+import CardService from '../services/cardService';
+
+export default class CardController {
+  private cardService = new CardService();
+
+  public createCard = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const card = req.body;
+    try {
+      const created_card = await this.cardService.createCard(card);
+      return res.status(201).json({
+        card: created_card
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public getCard = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      const card = await this.cardService.getCard(id);
+      return res.status(200).json({
+        card
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public getCards = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const cards = await this.cardService.getCards();
+      return res.status(200).json({
+        cards
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public updateCard = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    const card = req.body;
+    try {
+      const updated_card = await this.cardService.updateCard(id, card);
+      return res.status(200).json({
+        card: updated_card
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public deleteCard = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    try {
+      const deleted_card = await this.cardService.deleteCard(id);
+      return res.status(200).json({
+        card: deleted_card
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public getCardsByDeck = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+    try {
+      const cards = await this.cardService.getCardsByDeckId(id);
+      return res.status(200).json({
+        cards
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+}
