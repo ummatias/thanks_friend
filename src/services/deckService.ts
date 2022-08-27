@@ -2,7 +2,7 @@ import prisma from '../prisma/client';
 import { Deck } from '@prisma/client';
 
 export default class DeckService {
-  public createDeck = async (deck: Deck) => {
+  public createDeck = async (deck: Deck): Promise<Deck> => {
     const created_deck = await prisma.deck.create({
       data: {
         ...deck
@@ -12,7 +12,7 @@ export default class DeckService {
     return created_deck;
   };
 
-  public getDeck = async (id: string) => {
+  public getDeck = async (id: string): Promise<Deck> => {
     const deck = await prisma.deck.findFirstOrThrow({
       where: {
         id
@@ -21,12 +21,12 @@ export default class DeckService {
     return deck;
   };
 
-  public getDecks = async () => {
+  public getDecks = async (): Promise<Deck[]> => {
     const decks = await prisma.deck.findMany();
     return decks;
   };
 
-  public updateDeck = async (id: string, deck: Deck) => {
+  public updateDeck = async (id: string, deck: Deck): Promise<Deck> => {
     const updated_deck = await prisma.deck.update({
       where: {
         id
@@ -38,7 +38,7 @@ export default class DeckService {
     return updated_deck;
   };
 
-  public deleteDeck = async (id: string) => {
+  public deleteDeck = async (id: string): Promise<Deck> => {
     const deleted_deck = await prisma.deck.delete({
       where: {
         id
@@ -47,7 +47,16 @@ export default class DeckService {
     return deleted_deck;
   };
 
-  public getDeckByUser = async (userId: string) => {
+  public getDecksByUser = async (userId: string): Promise<Deck[]> => {
+    const decks = await prisma.deck.findMany({
+      where: {
+        userId
+      }
+    });
+    return decks;
+  };
+
+  public getDeckByUser = async (userId: string): Promise<Deck[]> => {
     const decks = await prisma.deck.findMany({
       where: {
         userId

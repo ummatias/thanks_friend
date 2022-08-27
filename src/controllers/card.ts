@@ -8,7 +8,7 @@ export default class CardController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const card = req.body;
     try {
       const created_card = await this.cardService.createCard(card);
@@ -20,7 +20,11 @@ export default class CardController {
     }
   };
 
-  public getCard = async (req: Request, res: Response, next: NextFunction) => {
+  public getCard = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
     const { id } = req.params;
     try {
       const card = await this.cardService.getCard(id);
@@ -32,7 +36,11 @@ export default class CardController {
     }
   };
 
-  public getCards = async (req: Request, res: Response, next: NextFunction) => {
+  public getCards = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
     try {
       const cards = await this.cardService.getCards();
       return res.status(200).json({
@@ -47,7 +55,7 @@ export default class CardController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const { id } = req.params;
     const card = req.body;
     try {
@@ -64,7 +72,7 @@ export default class CardController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const { id } = req.params;
     try {
       const deleted_card = await this.cardService.deleteCard(id);
@@ -80,7 +88,7 @@ export default class CardController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const { id } = req.params;
     try {
       const cards = await this.cardService.getCardsByDeckId(id);

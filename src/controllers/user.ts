@@ -10,7 +10,7 @@ export default class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const user = req.body;
     try {
       const created_user = await this.userService.createUser(user);
@@ -22,7 +22,11 @@ export default class UserController {
     }
   };
 
-  public getUsers = async (req: Request, res: Response, next: NextFunction) => {
+  public getUsers = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
     try {
       const users = await this.userService.getUsers();
       return res.status(200).json({
@@ -37,7 +41,7 @@ export default class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const { email } = req.params;
     try {
       const user = await this.userService.getUserByEmail(email);
@@ -53,7 +57,7 @@ export default class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const { id } = req.params;
     const user = req.body;
     try {
@@ -70,7 +74,7 @@ export default class UserController {
     req: Request,
     res: Response,
     next: NextFunction
-  ) => {
+  ): Promise<Response | void> => {
     const { id } = req.params;
     try {
       const deleted_user = await this.userService.deleteUser(id);
@@ -82,7 +86,11 @@ export default class UserController {
     }
   };
 
-  public login = async (req: Request, res: Response, next: NextFunction) => {
+  public login = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
     const { email, password } = req.body;
     try {
       const user = await this.userService.getUserByEmail(email);

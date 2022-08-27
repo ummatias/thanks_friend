@@ -9,6 +9,7 @@ router.get('/deck/:id', deckController.getDeck);
 router.get('/decks', deckController.getDecks);
 router.put('/deck/:id', deckController.updateDeck);
 router.delete('/deck/:id', deckController.deleteDeck);
-router.get('/deck/:email', deckController.getDeckByUser);
+router.get('/deck/:id', deckController.getDeckByUser);
+router.get('/decks/:id', deckController.getDecksByUser);
 
 export default router;

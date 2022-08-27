@@ -2,7 +2,7 @@ import prisma from '../prisma/client';
 import { Card } from '@prisma/client';
 
 export default class CardService {
-  public createCard = async (card: Card) => {
+  public createCard = async (card: Card): Promise<Card> => {
     const created_card = await prisma.card.create({
       data: {
         ...card
@@ -11,7 +11,7 @@ export default class CardService {
     return created_card;
   };
 
-  public getCard = async (id: string) => {
+  public getCard = async (id: string): Promise<Card> => {
     const card = await prisma.card.findFirstOrThrow({
       where: {
         id
@@ -20,12 +20,12 @@ export default class CardService {
     return card;
   };
 
-  public getCards = async () => {
+  public getCards = async (): Promise<Card[]> => {
     const cards = await prisma.card.findMany();
     return cards;
   };
 
-  public updateCard = async (id: string, card: Card) => {
+  public updateCard = async (id: string, card: Card): Promise<Card> => {
     const updated_card = await prisma.card.update({
       where: {
         id
@@ -37,7 +37,7 @@ export default class CardService {
     return updated_card;
   };
 
-  public deleteCard = async (id: string) => {
+  public deleteCard = async (id: string): Promise<Card> => {
     const deleted_card = await prisma.card.delete({
       where: {
         id
@@ -46,7 +46,26 @@ export default class CardService {
     return deleted_card;
   };
 
-  public getCardsByDeckId = async (deckId: string) => {
+  public deleteAllCArdsByDeck = async (deckId: string) => {
+    const cards = await prisma.card.findMany({
+      where: {
+        deckId
+      }
+    });
+    if (cards.length > 0) {
+      const deleted_cards = await prisma.card.deleteMany({
+        where: {
+          id: {
+            in: cards.map((card) => card.id)
+          }
+        }
+      });
+      return deleted_cards;
+    }
+    return [];
+  };
+
+  public getCardsByDeckId = async (deckId: string): Promise<Card[]> => {
     const cards = await prisma.card.findMany({
       where: {
         Deck: {
