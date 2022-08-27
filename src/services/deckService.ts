@@ -3,7 +3,6 @@ import { Deck } from '@prisma/client';
 
 export default class DeckService {
   public createDeck = async (deck: Deck) => {
-    console.log('deck', deck);
     const created_deck = await prisma.deck.create({
       data: {
         ...deck
