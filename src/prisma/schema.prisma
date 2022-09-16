@@ -13,12 +13,13 @@ model User {
   name      String
   email     String   @unique
   password  String
-  posts     Deck[]
+  decks     Deck[]
 }
 
 model Deck {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
+  public    Boolean  @default(false)
   name      String
   cards     Card[]
   User      User     @relation(fields: [userId], references: [id])
