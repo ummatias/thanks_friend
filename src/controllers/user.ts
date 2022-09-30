@@ -22,6 +22,22 @@ export default class UserController {
     }
   };
 
+  public getUser = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    const { id } = req.params;
+    try {
+      const user = await this.userService.getUser(id);
+      return res.status(200).json({
+        user
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
   public getUsers = async (
     req: Request,
     res: Response,
@@ -101,7 +117,7 @@ export default class UserController {
         });
       }
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || '', {
-        expiresIn: '1h'
+        expiresIn: '1d'
       });
       return res.status(200).json({
         user,

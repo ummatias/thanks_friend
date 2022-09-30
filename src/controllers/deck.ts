@@ -95,9 +95,7 @@ export default class DeckController {
     const { userId } = req.params;
     try {
       const decks = await this.deckService.getDecksByUser(userId);
-      return res.status(200).json({
-        decks
-      });
+      return res.status(200).json([...decks]);
     } catch (error) {
       return next(error);
     }
@@ -113,6 +111,21 @@ export default class DeckController {
       const decks = await this.deckService.getDeckByUser(userId);
       return res.status(200).json({
         decks
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public deleteAll = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const deletedCount = await this.deckService.deleteAll();
+      return res.status(200).json({
+        deck: deletedCount
       });
     } catch (error) {
       return next(error);

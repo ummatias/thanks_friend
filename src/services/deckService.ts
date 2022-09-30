@@ -2,6 +2,11 @@ import prisma from '../prisma/client';
 import { Deck } from '@prisma/client';
 
 export default class DeckService {
+
+  deleteAll() {
+    return prisma.deck.deleteMany({});
+  }
+  
   public createDeck = async (deck: Deck): Promise<Deck> => {
     const created_deck = await prisma.deck.create({
       data: {

@@ -2,6 +2,11 @@ import prisma from '../prisma/client';
 import { Card } from '@prisma/client';
 
 export default class CardService {
+  
+  deleteAll() {
+    return prisma.card.deleteMany({});
+  }
+
   public createCard = async (card: Card): Promise<Card> => {
     const created_card = await prisma.card.create({
       data: {

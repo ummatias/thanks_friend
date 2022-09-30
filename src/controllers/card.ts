@@ -99,4 +99,19 @@ export default class CardController {
       return next(error);
     }
   };
+
+  public deleteAll = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const deleted_cards = await this.cardService.deleteAll();
+      return res.status(200).json({
+        cards: deleted_cards
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
 }

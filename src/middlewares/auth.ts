@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
+import UserService from '../services/userService';
 
 export const auth = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.header('Authorization');
@@ -12,3 +13,4 @@ export const auth = async (req: Request, res: Response, next: NextFunction) => {
     return res.status(401).json({ message: 'Token not valid!' });
   }
 };
+
