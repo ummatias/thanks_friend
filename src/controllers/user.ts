@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from 'express';
-import UserService from '../services/userService';
 import * as bcrypt from 'bcrypt';
+import { NextFunction, Request, Response } from 'express';
 import * as jwt from 'jsonwebtoken';
+import UserService from '../services/userService';
 
 export default class UserController {
   private userService = new UserService();
@@ -109,6 +109,23 @@ export default class UserController {
       });
     } catch (error) {
       return next(error);
+    }
+  };
+
+  public me = async (req: Request, res: Response, next: NextFunction) => {
+    const authHeader = req.header('Authorization');
+    if (!authHeader) return res.status(401).json({ message: 'Access Denied!' });
+    const token = authHeader.split(' ')[1];
+    try {
+      const decoded = await jwt.verify(token, process.env.JWT_SECRET || '');
+      const userId = (decoded as any).id;
+      const user = await this.userService.getUser(userId);
+      const { password, ...rest } = user;
+      return res.status(200).json({ user: rest });
+
+      next();
+    } catch (error) {
+      return res.status(401).json({ message: 'Token not valid!' });
     }
   };
 }
