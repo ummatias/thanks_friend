@@ -1,11 +1,11 @@
-import './config/env';
 import express, { NextFunction } from 'express';
 import morgan from 'morgan';
-import deck from './routes/deck';
-import card from './routes/card';
-import user from './routes/user';
-import authUser from './routes/authUser';
+import './config/env';
 import { auth } from './middlewares/auth';
+import authUser from './routes/authUser';
+import card from './routes/card';
+import deck from './routes/deck';
+import user from './routes/user';
 
 const app = express();
 
@@ -16,8 +16,12 @@ app.use((req: express.Request, res: express.Response, next: NextFunction) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
-    'origin, X-Requested-With,Content-Type,Accept, Authorization'
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization'
   );
+  if (req.method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
+    return res.status(200).json({});
+  }
   next();
 });
 
