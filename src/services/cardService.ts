@@ -1,5 +1,5 @@
-import prisma from '../prisma/client';
 import { Card } from '@prisma/client';
+import prisma from '../prisma/client';
 
 export default class CardService {
   public createCard = async (card: Card): Promise<Card> => {
