@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from 'express';
-import DeckService from '../services/deckService';
+import { NextFunction, Request, Response } from 'express';
 import CardService from '../services/cardService';
+import DeckService from '../services/deckService';
 
 export default class DeckController {
   private deckService = new DeckService();

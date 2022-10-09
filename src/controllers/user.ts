@@ -103,8 +103,9 @@ export default class UserController {
       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET || '', {
         expiresIn: '1h'
       });
+      const { password: _, ...userWithoutPassword } = user;
       return res.status(200).json({
-        user,
+        user: userWithoutPassword,
         token
       });
     } catch (error) {
