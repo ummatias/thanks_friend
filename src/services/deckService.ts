@@ -56,12 +56,22 @@ export default class DeckService {
     return decks;
   };
 
-  public getDeckByUser = async (userId: string): Promise<Deck[]> => {
+  public getDecksPublic = async (): Promise<Deck[]> => {
     const decks = await prisma.deck.findMany({
       where: {
-        userId
+        public: true
       }
     });
     return decks;
+  };
+
+  public getDeckPublic = async (id: string): Promise<Deck> => {
+    const deck = await prisma.deck.findFirstOrThrow({
+      where: {
+        id,
+        public: true
+      }
+    });
+    return deck;
   };
 }

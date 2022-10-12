@@ -1,7 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import CardService from '../services/cardService';
+import DeckService from '../services/deckService';
 
 export default class CardController {
+  private deckService = new DeckService();
   private cardService = new CardService();
 
   public createCard = async (
@@ -89,12 +91,36 @@ export default class CardController {
     res: Response,
     next: NextFunction
   ): Promise<Response | void> => {
-    const { id } = req.params;
+    const { deckId } = req.params;
     try {
-      const cards = await this.cardService.getCardsByDeckId(id);
+      const cards = await this.cardService.getCardsByDeckId(deckId);
       return res.status(200).json({
         cards
       });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public getCardsByDeckPublic = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    const { deckId } = req.params;
+    console.log(deckId);
+    try {
+      const deck = await this.deckService.getDeck(deckId);
+      if (deck.public) {
+        const cards = await this.cardService.getCardsByDeckId(deckId);
+        return res.status(200).json({
+          cards
+        });
+      } else {
+        return res.status(401).json({
+          message: 'Unauthorized'
+        });
+      }
     } catch (error) {
       return next(error);
     }

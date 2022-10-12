@@ -53,6 +53,37 @@ export default class DeckController {
     }
   };
 
+  public getDecksPublic = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    try {
+      const decks = await this.deckService.getDecksPublic();
+      return res.status(200).json({
+        decks
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
+  public getDeckPublic = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> => {
+    const { id } = req.params;
+    try {
+      const deck = await this.deckService.getDeckPublic(id);
+      return res.status(200).json({
+        deck
+      });
+    } catch (error) {
+      return next(error);
+    }
+  };
+
   public updateDeck = async (
     req: Request,
     res: Response,
@@ -95,22 +126,6 @@ export default class DeckController {
     const { userId } = req.params;
     try {
       const decks = await this.deckService.getDecksByUser(userId);
-      return res.status(200).json({
-        decks
-      });
-    } catch (error) {
-      return next(error);
-    }
-  };
-
-  public getDeckByUser = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | void> => {
-    const { userId } = req.params;
-    try {
-      const decks = await this.deckService.getDeckByUser(userId);
       return res.status(200).json({
         decks
       });

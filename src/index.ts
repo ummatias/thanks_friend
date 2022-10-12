@@ -5,6 +5,8 @@ import { auth } from './middlewares/auth';
 import authUser from './routes/authUser';
 import card from './routes/card';
 import deck from './routes/deck';
+import cardPublic from './routes/public/cardPublic';
+import deckPublic from './routes/public/deckPublic';
 import user from './routes/user';
 
 const app = express();
@@ -30,6 +32,8 @@ app.get('/', (req: express.Request, res: express.Response) => {
 });
 
 app.use(authUser);
+app.use(deckPublic);
+app.use(cardPublic);
 app.use(auth);
 app.use('/', deck);
 app.use('/', card);
