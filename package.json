@@ -29,7 +29,8 @@
   },
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "rm -rf build/ && prettier --write src/ && tsc",
-    "pretf": "prettier --config .prettierrc 'src/**/*.ts' --write"
+    "start": "node build/index.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
   }
 }
