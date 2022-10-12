@@ -68,9 +68,7 @@ export default class CardService {
   public getCardsByDeckId = async (deckId: string): Promise<Card[]> => {
     const cards = await prisma.card.findMany({
       where: {
-        Deck: {
-          id: deckId
-        }
+        deckId
       }
     });
     return cards;
