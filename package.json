@@ -4,6 +4,10 @@
   "main": "src/index.ts",
   "author": "Mateus Matias Ribeiro",
   "license": "MIT",
+  "engines": {
+    "node": "16.17.1",
+    "npm": "8.15.0"
+  },
   "dependencies": {
     "@prisma/client": "^4.2.1",
     "@types/axios": "^0.14.0",
