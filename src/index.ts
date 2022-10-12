@@ -60,7 +60,7 @@ app.use(
   }
 );
 
-const PORT: any = process.env.PORT ?? 8080;
+const PORT: any = process.env.APP_PORT ?? 8080;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
