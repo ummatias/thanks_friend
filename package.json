@@ -34,6 +34,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
+    "go": "npm run prismagen && npm run start",
     "prismgen": "prisma generate --schema ./src/prisma/schema.prisma",
     "pm2": "pm2 start src/index.ts --interpreter ts-node"
   }
