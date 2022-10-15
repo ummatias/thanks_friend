@@ -32,10 +32,10 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "start": "npm run prismagen && npm run go",
     "dev": "nodemon src/index.ts",
-    "go": "npm run prismgen && npm run start",
     "prismgen": "prisma generate --schema ./src/prisma/schema.prisma",
-    "pm2": "pm2 start src/index.ts --interpreter ts-node"
+    "pm2": "pm2 start src/index.ts --interpreter ts-node",
+    "go": "ts-node src/index.ts"
   }
 }
