@@ -22,21 +22,6 @@ export default class UserController {
     }
   };
 
-  public getUsers = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | void> => {
-    try {
-      const users = await this.userService.getUsers();
-      return res.status(200).json({
-        users
-      });
-    } catch (error) {
-      return next(error);
-    }
-  };
-
   public getUserByEmail = async (
     req: Request,
     res: Response,

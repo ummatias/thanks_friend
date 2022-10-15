@@ -21,11 +21,6 @@ export default class DeckService {
     return deck;
   };
 
-  public getDecks = async (): Promise<Deck[]> => {
-    const decks = await prisma.deck.findMany();
-    return decks;
-  };
-
   public updateDeck = async (id: string, deck: Deck): Promise<Deck> => {
     const updated_deck = await prisma.deck.update({
       where: {

@@ -6,8 +6,7 @@ const router = express.Router();
 
 router.post('/deck', deckController.createDeck);
 router.get('/deck/:id', deckController.getDeck);
-router.get('/decks/:id', deckController.getDecksByUser);
-router.get('/decks', deckController.getDecks);
+router.get('/decks/:userId', deckController.getDecksByUser);
 router.put('/deck/:id', deckController.updateDeck);
 router.delete('/deck/:id', deckController.deleteDeck);
 

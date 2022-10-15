@@ -22,11 +22,6 @@ export default class UserService {
     return user;
   };
 
-  public getUsers = async (): Promise<User[]> => {
-    const users = await prisma.user.findMany();
-    return users;
-  };
-
   public updateUser = async (id: string, user: User): Promise<User> => {
     const updated_user = await prisma.user.update({
       where: {

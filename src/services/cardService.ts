@@ -20,11 +20,6 @@ export default class CardService {
     return card;
   };
 
-  public getCards = async (): Promise<Card[]> => {
-    const cards = await prisma.card.findMany();
-    return cards;
-  };
-
   public updateCard = async (id: string, card: Card): Promise<Card> => {
     const updated_card = await prisma.card.update({
       where: {

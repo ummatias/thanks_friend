@@ -38,21 +38,6 @@ export default class CardController {
     }
   };
 
-  public getCards = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | void> => {
-    try {
-      const cards = await this.cardService.getCards();
-      return res.status(200).json({
-        cards
-      });
-    } catch (error) {
-      return next(error);
-    }
-  };
-
   public updateCard = async (
     req: Request,
     res: Response,

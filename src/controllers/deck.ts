@@ -38,21 +38,6 @@ export default class DeckController {
     }
   };
 
-  public getDecks = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<Response | void> => {
-    try {
-      const decks = await this.deckService.getDecks();
-      return res.status(200).json({
-        decks
-      });
-    } catch (error) {
-      return next(error);
-    }
-  };
-
   public getDecksPublic = async (
     req: Request,
     res: Response,
