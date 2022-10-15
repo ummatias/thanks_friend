@@ -1,6 +1,6 @@
 import { User } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-import prisma from '../../prisma/client';
+import prisma from '../prisma/client';
 
 export default class UserService {
   public createUser = async (user: User): Promise<User> => {

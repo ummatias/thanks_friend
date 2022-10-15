@@ -5,7 +5,7 @@
   "author": "Mateus Matias Ribeiro",
   "license": "MIT",
   "engines": {
-    "node": "16.16.0",
+    "node": "16.17.1",
     "npm": "8.15.0"
   },
   "dependencies": {
@@ -32,10 +32,9 @@
     "uuid": "^8.3.2"
   },
   "scripts": {
-    "start": "npm run prismagen && npm run go",
+    "start": "ts-node src/index.ts",
     "dev": "nodemon src/index.ts",
     "prismgen": "prisma generate --schema ./src/prisma/schema.prisma",
-    "pm2": "pm2 start src/index.ts --interpreter ts-node",
-    "go": "ts-node src/index.ts"
+    "pm2": "pm2 start src/index.ts --interpreter ts-node"
   }
 }

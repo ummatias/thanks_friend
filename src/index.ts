@@ -1,13 +1,13 @@
 import express, { NextFunction } from 'express';
 import morgan from 'morgan';
-import './src/config/env';
-import { auth } from './src/middlewares/auth';
-import authUser from './src/routes/authUser';
-import card from './src/routes/card';
-import deck from './src/routes/deck';
-import cardPublic from './src/routes/public/cardPublic';
-import deckPublic from './src/routes/public/deckPublic';
-import user from './src/routes/user';
+import './config/env';
+import { auth } from './middlewares/auth';
+import authUser from './routes/authUser';
+import card from './routes/card';
+import deck from './routes/deck';
+import cardPublic from './routes/public/cardPublic';
+import deckPublic from './routes/public/deckPublic';
+import user from './routes/user';
 
 const app = express();
 
